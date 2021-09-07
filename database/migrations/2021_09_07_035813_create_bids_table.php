@@ -16,9 +16,9 @@ class CreateBidsTable extends Migration
         Schema::create('bids', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('user_id');
+            $table->string('user_id');
             $table->double('bid', 8, 2);
-            $table->boolean('autobid');
+            $table->boolean('autobid')->nullable()->default(0);
             $table->foreignId('item_id')->constrained();
         });
     }

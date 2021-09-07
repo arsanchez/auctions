@@ -20,4 +20,4 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::view('/{path?}', 'layouts.app');
+Route::view('/{path?}', 'layouts.app')->where('path', '.*')->name('react');

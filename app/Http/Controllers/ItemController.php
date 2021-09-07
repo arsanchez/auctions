@@ -18,9 +18,6 @@ class ItemController extends Controller
 
     public function getItems(Request $request)
     {
-        
-
-
         if (!empty($request->search)) {
             $items = Item::sortable(['price' => $request->sort])
             ->where('name', 'like', "%{$request->search}%")
@@ -33,6 +30,44 @@ class ItemController extends Controller
         return [
             'status' => "success",
             'items' => $items
-        ]; 
+        ];
+    }
+
+    public function getItemDetails($id, Request $request)
+    {
+        $item = Item::findOrFail($id);
+        $item->last_bid = $item->bids->last();
+        return $item;
+    }
+
+    public function addBid(Request $request)
+    {
+        // Validating
+        $validated = $request->validate([
+            'bid' => 'required',
+            'user' => 'required',
+            'id' => 'required',
+        ]);
+
+        $item = Item::findOrFail($request->id);
+        $last_bid = $item->bids->last();
+
+         // Adding the new bid
+        $item->bids()->create(['user_id' => $request->user,
+                                'item_id' => $request->id,
+                                'bid' => $request->bid,
+                                'autobid' => $request->auto_bid,
+                                ]);
+
+        // Checking if there was autobid for the last bid
+        if ($last_bid->autobid) {
+            $item->bids()->create(['user_id' => $last_bid->user_id,
+                                'item_id' => $last_bid->item_id,
+                                'bid' => ($request->bid + 1),
+                                'autobid' => false,
+                                ]);
+        }
+
+        return ['status' => 'success'];
     }
 }

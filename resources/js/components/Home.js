@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ReactPaginate from 'react-paginate';
-import Progress from 'react-progress-2';
 import ItemContent from '../components/Item';
 import FilterBar from '../components/FilterBar';
 
@@ -53,13 +52,12 @@ class Home extends Component {
         });
       },
       (error) => {
-   
+
       }
     )
   }
 
   handleFilter(data) {
-    console.log(data);
     this.setState({ sort: data.sort, search: data.search }, this.loadItems);
   }
 

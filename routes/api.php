@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/items', [ItemController::class, 'getItems']);
+Route::get('/item/{id}', [ItemController::class, 'getItemDetails']);
+Route::post('/bid', [ItemController::class, 'addBid']);

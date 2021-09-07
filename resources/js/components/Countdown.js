@@ -35,24 +35,12 @@ class Countdown extends React.Component {
 
         return (
             <div>
-                <h1>Countdown</h1>
-                <div className="countdown-wrapper">
-                    <div className="countdown-item">
-                        {days}
-                        <span>days</span>
-                    </div>
-                    <div className="countdown-item">
-                        {hours}
-                        <span>hours</span>
-                    </div>
-                    <div className="countdown-item">
-                        {minutes}
-                        <span>minutes</span>
-                    </div>
-                    <div className="countdown-item">
-                        {seconds}
-                        <span>seconds</span>
-                    </div>
+                <h5>Time remainig</h5>
+                <div className="row">
+                    <h6 className="col-sm-3"><span className="badge badge-secondary ">{days}</span>days</h6>
+                    <h6 className="col-sm-3"><span className="badge badge-secondary">{hours}</span>hours</h6>
+                    <h6 className="col-sm-3"><span className="badge badge-secondary">{minutes}</span>minutes</h6>
+                    <h6 className="col-sm-3"><span className="badge badge-secondary">{seconds}</span>seconds</h6>
                 </div>
             </div>
         );

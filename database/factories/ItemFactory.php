@@ -19,8 +19,8 @@ use Illuminate\Support\Str;
 
 $factory->define(Item::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'description' => $faker->sentence(5),
+        'name' => $faker->sentence(2),
+        'description' => $faker->sentence(20),
         'price' => $faker->numberBetween($min = 100, $max = 10000),
         'photo_url' => $faker->imageUrl($width = 200, $height = 200),
         'ends_at' => $faker->dateTimeBetween('now', '+15 days'),
