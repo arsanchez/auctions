@@ -69856,70 +69856,6 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/PrivateRoute.js":
-/*!**************************************!*\
-  !*** ./resources/js/PrivateRoute.js ***!
-  \**************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-var _excluded = ["component", "path"];
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
- // 3.1
-
-var state_of_state = localStorage["appState"];
-
-if (!state_of_state) {
-  var appState = {
-    isLoggedIn: false,
-    user: {}
-  };
-  localStorage["appState"] = JSON.stringify(appState);
-}
-
-var state = localStorage["appState"];
-var AppState = JSON.parse(state); // 3.2
-
-var Auth = {
-  isLoggedIn: AppState.isLoggedIn,
-  user: AppState
-}; // 3.3
-
-var PrivateRoute = function PrivateRoute(_ref) {
-  var Component = _ref.component,
-      path = _ref.path,
-      rest = _objectWithoutProperties(_ref, _excluded);
-
-  return /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Route"], _extends({
-    path: path
-  }, rest, {
-    render: function render(props) {
-      return Auth.isLoggedIn ? /*#__PURE__*/React.createElement(Component, props) : /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Redirect"], {
-        to: {
-          pathname: "/login",
-          state: {
-            prevLocation: path,
-            error: "You need to login first!"
-          }
-        }
-      });
-    }
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["withRouter"])(PrivateRoute));
-
-/***/ }),
-
 /***/ "./resources/js/Router.js":
 /*!********************************!*\
   !*** ./resources/js/Router.js ***!
@@ -69935,12 +69871,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Home */ "./resources/js/components/Home.js");
 /* harmony import */ var _views_Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/Login */ "./resources/js/views/Login.js");
 /* harmony import */ var _views_NotFound__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/NotFound */ "./resources/js/views/NotFound.js");
-/* harmony import */ var _PrivateRoute__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PrivateRoute */ "./resources/js/PrivateRoute.js");
 
 
 
-
- // User is LoggedIn
 
 
 
@@ -70102,7 +70035,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Footer = function Footer() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, "Whatever normally goes into the footer");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Footer);
@@ -70151,7 +70084,6 @@ var Header = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(Header);
 
-  // 1.1
   function Header(props) {
     var _this;
 
@@ -70164,8 +70096,7 @@ var Header = /*#__PURE__*/function (_Component) {
     };
     _this.logOut = _this.logOut.bind(_assertThisInitialized(_this));
     return _this;
-  } // 1.2
-
+  }
 
   _createClass(Header, [{
     key: "logOut",
@@ -70177,8 +70108,7 @@ var Header = /*#__PURE__*/function (_Component) {
       localStorage["appState"] = JSON.stringify(appState);
       this.setState(appState);
       this.props.history.push('/login');
-    } // 1.3
-
+    }
   }, {
     key: "render",
     value: function render() {
@@ -70192,10 +70122,11 @@ var Header = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "navbar-brand",
         to: "/"
-      }, "Auctions"), this.state.isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, "Auctions"), this.state.isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
         className: "nav-link",
-        to: "/dashboard"
-      }, "Dashboard") : "", !this.state.isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        onClick: this.logOut
+      }, "Logout") : "", !this.state.isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "nav-link",
         to: "/login"
       }, "Login") : ""));
@@ -70281,12 +70212,21 @@ var Home = /*#__PURE__*/function (_Component) {
       }
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (!this.state.isLoggedIn) {
+        return this.props.history.push('/login');
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
         userData: this.state.user,
         userIsLoggedIn: this.state.isLoggedIn
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Whatever normally goes into the home/index page; A Plea To Heal The World for instance"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Footer__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Whatever normally goes into the home/index page; A Plea To Heal The World for instance")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Footer__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
@@ -70308,7 +70248,7 @@ var Home = /*#__PURE__*/function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _LoginContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoginContainer */ "./resources/js/views/LoginContainer.js");
+/* harmony import */ var _LoginForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoginForm */ "./resources/js/views/LoginForm.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -70358,7 +70298,7 @@ var Login = /*#__PURE__*/function (_Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginContainer__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
         redirect: this.state.redirect
       }));
     }
@@ -70371,10 +70311,10 @@ var Login = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/views/LoginContainer.js":
-/*!**********************************************!*\
-  !*** ./resources/js/views/LoginContainer.js ***!
-  \**********************************************/
+/***/ "./resources/js/views/LoginForm.js":
+/*!*****************************************!*\
+  !*** ./resources/js/views/LoginForm.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -70414,15 +70354,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var LoginContainer = /*#__PURE__*/function (_Component) {
-  _inherits(LoginContainer, _Component);
+var LoginForm = /*#__PURE__*/function (_Component) {
+  _inherits(LoginForm, _Component);
 
-  var _super = _createSuper(LoginContainer);
+  var _super = _createSuper(LoginForm);
 
-  function LoginContainer(props) {
+  function LoginForm(props) {
     var _this;
 
-    _classCallCheck(this, LoginContainer);
+    _classCallCheck(this, LoginForm);
 
     _this = _super.call(this, props);
     _this.state = {
@@ -70441,7 +70381,7 @@ var LoginContainer = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass(LoginContainer, [{
+  _createClass(LoginForm, [{
     key: "componentWillMount",
     value: function componentWillMount() {
       var state = localStorage["appState"];
@@ -70459,7 +70399,7 @@ var LoginContainer = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _ref = this.state.redirect.state || {
         prevLocation: {
-          pathname: '/dashboard'
+          pathname: '/'
         }
       },
           prevLocation = _ref.prevLocation;
@@ -70471,69 +70411,36 @@ var LoginContainer = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this2 = this;
-
       e.preventDefault();
       this.setState({
         formSubmitting: true
-      });
-      var userData = this.state.user;
-      axios.post("/api/auth/login", userData).then(function (response) {
-        return response;
-      }).then(function (json) {
-        if (json.data.success) {
-          var _userData = {
-            id: json.data.id,
-            name: json.data.name,
-            email: json.data.email,
-            access_token: json.data.access_token
-          };
-          var appState = {
-            isLoggedIn: true,
-            user: _userData
-          };
-          localStorage["appState"] = JSON.stringify(appState);
+      }); // Dummy login credentials
 
-          _this2.setState({
-            isLoggedIn: appState.isLoggedIn,
-            user: appState.user,
-            error: ''
-          });
+      if (this.state.user.email == "user1" && this.state.user.password == "pass1" || this.state.user.email == "user2" && this.state.user.password == "pass2") {
+        var userData = {
+          id: this.state.user.email,
+          name: this.state.user.email,
+          email: this.state.user.email
+        };
+        var appState = {
+          isLoggedIn: true,
+          user: userData
+        };
+        localStorage["appState"] = JSON.stringify(appState);
+        this.setState({
+          isLoggedIn: appState.isLoggedIn,
+          user: appState.user,
+          error: ''
+        });
+        location.reload();
+      } else {
+        this.setState({
+          formSubmitting: false
+        });
+        alert('Invalid credentials');
+      }
 
-          location.reload();
-        } else {
-          alert("Our System Failed To Register Your Account!");
-        }
-      })["catch"](function (error) {
-        if (error.response) {
-          // The request was made and the server responded with a status code that falls out of the range of 2xx
-          var err = error.response.data;
-
-          _this2.setState({
-            error: err.message,
-            errorMessage: err.errors,
-            formSubmitting: false
-          });
-        } else if (error.request) {
-          // The request was made but no response was received `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in node.js
-          var _err = error.request;
-
-          _this2.setState({
-            error: _err,
-            formSubmitting: false
-          });
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          var _err2 = error.message;
-
-          _this2.setState({
-            error: _err2,
-            formSubmitting: false
-          });
-        }
-      })["finally"](this.setState({
-        error: ''
-      }));
+      console.log(this.state.user);
     }
   }, {
     key: "handleEmail",
@@ -70573,7 +70480,7 @@ var LoginContainer = /*#__PURE__*/function (_Component) {
         className: "offset-xl-3 col-xl-6 offset-lg-1 col-lg-10 col-md-12 col-sm-12 col-12 "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "text-center mb30"
-      }, "Log In To Your Account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, "Log in to bid in the auctions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
@@ -70600,24 +70507,14 @@ var LoginContainer = /*#__PURE__*/function (_Component) {
         type: "submit",
         name: "singlebutton",
         className: "btn btn-default btn-lg  btn-block mb10"
-      }, " ", this.state.formSubmitting ? "Logging You In..." : "Log In", " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-white"
-      }, "Don't have an account? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/register",
-        className: "text-yellow"
-      }, " Register"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "pull-right"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/",
-        className: "text-white"
-      }, "Back to Index")))));
+      }, " ", this.state.formSubmitting ? "Logging You In..." : "Log In", " ")))));
     }
   }]);
 
-  return LoginContainer;
+  return LoginForm;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(LoginContainer));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(LoginForm));
 
 /***/ }),
 

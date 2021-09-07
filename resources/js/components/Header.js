@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom';
 class Header extends Component {
-  // 1.1
+
   constructor(props) {
     super(props);
       this.state = {
@@ -10,7 +10,7 @@ class Header extends Component {
       };
       this.logOut = this.logOut.bind(this);
   }
-  // 1.2
+
   logOut() {
     let appState = {
       isLoggedIn: false,
@@ -20,7 +20,7 @@ class Header extends Component {
     this.setState(appState);
     this.props.history.push('/login');
   }
-  // 1.3
+
   render() {
     const aStyle = {
       cursor: 'pointer'
@@ -30,8 +30,8 @@ class Header extends Component {
         <nav className="navbar navbar-expand-md navbar-light navbar-laravel'">
           <div className="container">
             <Link className="navbar-brand" to="/">Auctions</Link>
-            {this.state.isLoggedIn ? 
-            <Link className="nav-link" to="/dashboard">Dashboard</Link> : ""}
+            {this.state.isLoggedIn ?
+            <a href="#" className="nav-link" onClick={this.logOut}>Logout</a>: ""}
             {!this.state.isLoggedIn ?
             <Link className="nav-link" to="/login">Login</Link>: ""}
         </div>
