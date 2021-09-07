@@ -47,7 +47,7 @@
 
   
 
-- Go to localhost:8000 and log with one of these user:pass pairs 
+- Go to localhost:8000 and login with one of these user:pass pairs 
 
   user1:pass1 user2:pass2
 
