@@ -60,7 +60,7 @@ class ItemController extends Controller
                                 ]);
 
         // Checking if there was autobid for the last bid
-        if ($last_bid->autobid) {
+        if (!empty($last_bid) && $last_bid->autobid) {
             $item->bids()->create(['user_id' => $last_bid->user_id,
                                 'item_id' => $last_bid->item_id,
                                 'bid' => ($request->bid + 1),
