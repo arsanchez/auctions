@@ -25,6 +25,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "react-flash-message": "^1.0.7",
         "react-router-dom": "^5.2.1"
     }
 }
