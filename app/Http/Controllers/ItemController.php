@@ -18,7 +18,17 @@ class ItemController extends Controller
 
     public function getItems(Request $request)
     {
-        $items = Item::paginate(10);
+        
+
+
+        if (!empty($request->search)) {
+            $items = Item::sortable(['price' => $request->sort])
+            ->where('name', 'like', "%{$request->search}%")
+            ->orWhere('description', 'like', "%{$request->search}%")
+            ->paginate(10);
+        } else {
+            $items = Item::sortable(['price' => $request->sort])->paginate(10);
+        }
 
         return [
             'status' => "success",

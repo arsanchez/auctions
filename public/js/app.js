@@ -92595,7 +92595,7 @@ var FilterBar = /*#__PURE__*/function (_Component) {
 
     _this.state = {
       search: '',
-      sort: 'desc'
+      sort: 'asc'
     };
     _this.handleFilter = _this.handleFilter.bind(_assertThisInitialized(_this));
     return _this;
@@ -92842,7 +92842,9 @@ var Home = /*#__PURE__*/function (_Component) {
       user: {},
       items: [],
       pageCount: 1,
-      currentPage: 1
+      currentPage: 1,
+      sort: 'asc',
+      search: ''
     };
     _this.handlePageChange = _this.handlePageChange.bind(_assertThisInitialized(_this));
     _this.handleFilter = _this.handleFilter.bind(_assertThisInitialized(_this));
@@ -92877,7 +92879,7 @@ var Home = /*#__PURE__*/function (_Component) {
     value: function loadItems() {
       var _this2 = this;
 
-      fetch("api/items?page=" + this.state.currentPage).then(function (res) {
+      fetch("api/items?page=" + this.state.currentPage + '&sort=' + this.state.sort + '&search=' + this.state.search).then(function (res) {
         return res.json();
       }).then(function (result) {
         _this2.setState({
@@ -92892,6 +92894,10 @@ var Home = /*#__PURE__*/function (_Component) {
     key: "handleFilter",
     value: function handleFilter(data) {
       console.log(data);
+      this.setState({
+        sort: data.sort,
+        search: data.search
+      }, this.loadItems);
     }
   }, {
     key: "handlePageChange",

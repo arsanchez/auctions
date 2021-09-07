@@ -14,7 +14,9 @@ class Home extends Component {
       user: {},
       items: [],
       pageCount: 1,
-			currentPage: 1
+			currentPage: 1,
+      sort: 'asc',
+      search: ''
     }
 
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -39,7 +41,7 @@ class Home extends Component {
   }
 
   loadItems() {
-    fetch("api/items?page=" + this.state.currentPage)
+    fetch("api/items?page=" + this.state.currentPage + '&sort=' + this.state.sort + '&search=' + this.state.search)
     .then(res => res.json())
     .then(
       (result) => {
@@ -57,7 +59,8 @@ class Home extends Component {
   }
 
   handleFilter(data) {
-    console.log(data)
+    console.log(data);
+    this.setState({ sort: data.sort, search: data.search }, this.loadItems);
   }
 
   async handlePageChange(data) {

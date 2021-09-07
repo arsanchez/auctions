@@ -6,7 +6,7 @@ class FilterBar extends Component {
     super(props);
       this.state = {
         search: '',
-        sort: 'desc'
+        sort: 'asc'
       };
       this.handleFilter = this.handleFilter.bind(this);
   }
